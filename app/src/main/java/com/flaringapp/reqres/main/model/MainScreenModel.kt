@@ -1,41 +1,36 @@
 package com.flaringapp.reqres.main.model
 
 import android.content.Context
-import com.flaringapp.reqres.main.model.data.User
 import com.flaringapp.reqres.main.model.network.NetworkService
 import com.flaringapp.reqres.main.model.network.networkModels.PageWebModel
-import io.reactivex.BackpressureStrategy
-import io.reactivex.Flowable
-import io.reactivex.Single
+import com.flaringapp.reqres.main.model.objects.ListUser
+import io.reactivex.Observable
 import io.reactivex.schedulers.Schedulers
 import io.reactivex.subjects.PublishSubject
 
 class MainScreenModel(
     private val context: Context
 ) {
-    fun requestLoadUsersData(): Single<PageWebModel> {
-//        val publishSubject = PublishSubject.create<PageWebModel>()
-//
-//        val users: ArrayList<User> = ArrayList()
-//
-//        val publisher = Publi
-//
-//        return Single.fromCallable {
-//            publishSubject
-//                .subscribeOn(Schedulers.io())
-//                .observeOn(Schedulers.io())
-//                .subscribe(
-//                    {},
-//                    {},
-//                    {}
-//                )
-//        }.subscribeOn(Schedulers.io())
-//            .observeOn()
+    fun requestLoadUsersData(): Observable<List<ListUser>> {
 
-        return NetworkService.instance.getJSONApi().getPage(0)
+        val resultPublusher = PublishSubject.create<List<ListUser>>()
+
+
+
+        return resultPublusher
     }
 
-    private fun loadPage(index: Int): Single<PageWebModel> {
-        return NetworkService.instance.getJSONApi().getPage(index)
+    private fun loadPage(index: Int, loadListener: PublishSubject<PageWebModel>) {
+        val pageLoadDisposable = NetworkService.instance.getJSONApi().getPage(index)
+            .subscribeOn(Schedulers.io())
+            .observeOn(Schedulers.io())
+            .subscribe(
+                {
+                    loadListener.onNext(it)
+                },
+                {
+                    loadListener.onError(it)
+                }
+            )
     }
 }
