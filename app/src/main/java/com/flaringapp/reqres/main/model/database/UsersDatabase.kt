@@ -5,30 +5,32 @@ import androidx.room.Database
 import androidx.room.Room
 import androidx.room.RoomDatabase
 import androidx.room.TypeConverters
+import com.flaringapp.reqres.main.model.objects.ListUser
 import com.flaringapp.reqres.main.model.objects.User
 
-@Database(entities = [User::class], version = 1, exportSchema = false)
+@Database(entities = [User::class, ListUser::class], version = 1, exportSchema = false)
 @TypeConverters(TypeConverter::class)
 abstract class UsersDatabase: RoomDatabase() {
 
-    abstract fun usersDataDAO(): UsersDataDAO
+    abstract fun usersDAO(): UsersDAO
+    abstract fun listUsersDAO(): ListUsersDAO
 
     companion object {
-        private var INSTANCE: UsersDatabase? = null
+        private var instance: UsersDatabase? = null
 
         fun getInstance(context: Context): UsersDatabase? {
-            if (INSTANCE == null) {
+            if (instance == null) {
                 synchronized(UsersDatabase::class) {
-                    INSTANCE = Room.databaseBuilder(context.applicationContext,
+                    instance = Room.databaseBuilder(context.applicationContext,
                         UsersDatabase::class.java, "users.db")
                         .build()
                 }
             }
-            return INSTANCE
+            return instance
         }
 
         fun destroyInstance() {
-            INSTANCE = null
+            instance = null
         }
     }
 }

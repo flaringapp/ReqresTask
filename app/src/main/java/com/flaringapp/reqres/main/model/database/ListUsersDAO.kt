@@ -3,17 +3,18 @@ package com.flaringapp.reqres.main.model.database
 import androidx.room.*
 import androidx.room.OnConflictStrategy.REPLACE
 import com.flaringapp.reqres.main.model.objects.ListUser
-import com.flaringapp.reqres.main.model.objects.User
-import io.reactivex.Flowable
 import io.reactivex.Single
 
 @Dao
-interface ListUsersDataDAO {
+interface ListUsersDAO {
     @Query("SELECT * from listUsers")
-    fun getAll(): Flowable<List<User>>
+    fun getAll(): Single<List<ListUser>>
 
     @Insert(onConflict = REPLACE)
     fun insert(user: ListUser)
+
+    @Insert(onConflict = REPLACE)
+    fun insert(user: List<ListUser>)
 
     @Delete
     fun delete(user: ListUser)

@@ -28,7 +28,7 @@ class UsersListAdapter(
     private val clickPublisher = PublishSubject.create<ListUser>()
     val clickEvent: Observable<ListUser> = clickPublisher
 
-    fun updateModels(models: List<ListUser>) {
+    fun setModels(models: List<ListUser>) {
         applyAndAnimateRemovals(models)
         applyAndAnimateAdditions(models)
         applyAndAnimateMovedItems(models)
