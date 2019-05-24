@@ -43,7 +43,7 @@ class MainActivity : AppCompatActivity() {
             .observeOn(AndroidSchedulers.mainThread())
             .subscribe(
                 {
-
+                    listAdapter?.updateModels(it)
                 },
                 {
                     Toast.makeText(this, "Error: ${it.message}", Toast.LENGTH_LONG).show()
