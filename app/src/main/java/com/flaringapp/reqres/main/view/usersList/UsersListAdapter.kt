@@ -24,6 +24,9 @@ class UsersListAdapter(
     private val clickPublisher = PublishSubject.create<ListUser>()
     val clickEvent: Observable<ListUser> = clickPublisher
 
+    /**
+     * Changes current models to new ones with animations
+     */
     fun setModels(models: List<ListUser>) {
         applyAndAnimateRemovals(models)
         applyAndAnimateAdditions(models)

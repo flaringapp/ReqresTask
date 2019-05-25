@@ -20,6 +20,7 @@ class MainScreenModel(
 
     fun destroy() {
         for(disposable in disposables) disposable.dispose()
+        disposables.clear()
     }
 
     /**
