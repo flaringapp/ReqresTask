@@ -129,6 +129,7 @@ class MainActivity : AppCompatActivity() {
         fm.beginTransaction()
             .add(R.id.user_fragment_container, fragment)
             .setCustomAnimations(R.anim.slide_in_right, R.anim.slide_out_right)
+            .addToBackStack(null)
             .commit()
     }
 }

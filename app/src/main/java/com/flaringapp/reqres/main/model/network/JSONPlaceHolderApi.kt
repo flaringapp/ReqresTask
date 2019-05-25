@@ -1,6 +1,7 @@
 package com.flaringapp.reqres.main.model.network
 
 import com.flaringapp.reqres.main.model.network.networkModels.PageWebModel
+import com.flaringapp.reqres.main.model.network.networkModels.UserResponce
 import com.flaringapp.reqres.main.model.network.networkModels.UserWebModel
 import io.reactivex.Single
 import retrofit2.http.GET
@@ -12,5 +13,5 @@ interface JSONPlaceHolderApi {
     fun getPage(@Query("page") pageNumber: Int): Single<PageWebModel>
 
     @GET("users/{id}")
-    fun getUser(@Path("id") id: Int): Single<UserWebModel>
+    fun getUser(@Path("id") id: Int): Single<UserResponce>
 }

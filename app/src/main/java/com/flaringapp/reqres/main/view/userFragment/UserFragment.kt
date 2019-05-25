@@ -77,7 +77,8 @@ class UserFragment : Fragment() {
         lastNameText = view.findViewById(R.id.last_name_text)
         emailText = view.findViewById(R.id.email_text)
 
-        emailText!!.setOnClickListener {
+        val emailLayout:View = view.findViewById(R.id.email_layout)
+        emailLayout.setOnClickListener {
             if (context != null && email != null) ViewUtils.sendEmail(context!!, email!!)
         }
 
@@ -101,7 +102,7 @@ class UserFragment : Fragment() {
      */
     private fun loadData() {
         if (model == null) return
-        disposables += model!!.loadUser(id)
+        disposables += model!!.loadUser(userId)
             .subscribeOn(Schedulers.io())
             .observeOn(AndroidSchedulers.mainThread())
             .subscribe(
@@ -121,7 +122,7 @@ class UserFragment : Fragment() {
 
     private fun updateData() {
         if (model == null) return
-        disposables += model!!.updateUser(id)
+        disposables += model!!.updateUser(userId)
             .observeOn(Schedulers.io())
             .observeOn(AndroidSchedulers.mainThread())
             .subscribe(
