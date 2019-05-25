@@ -4,12 +4,10 @@ import android.content.Context
 import androidx.room.Database
 import androidx.room.Room
 import androidx.room.RoomDatabase
-import androidx.room.TypeConverters
 import com.flaringapp.reqres.main.model.objects.ListUser
 import com.flaringapp.reqres.main.model.objects.User
 
 @Database(entities = [User::class, ListUser::class], version = 1, exportSchema = false)
-@TypeConverters(TypeConverter::class)
 abstract class UsersDatabase: RoomDatabase() {
 
     abstract fun usersDAO(): UsersDAO

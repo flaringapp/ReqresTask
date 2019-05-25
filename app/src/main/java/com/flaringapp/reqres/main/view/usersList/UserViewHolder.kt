@@ -1,4 +1,4 @@
-package com.flaringapp.reqres.main.view
+package com.flaringapp.reqres.main.view.usersList
 
 import android.view.View
 import android.widget.ImageView

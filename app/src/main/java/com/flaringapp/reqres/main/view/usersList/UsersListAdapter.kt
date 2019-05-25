@@ -1,4 +1,4 @@
-package com.flaringapp.reqres.main.view
+package com.flaringapp.reqres.main.view.usersList
 
 import android.graphics.Bitmap
 import android.view.LayoutInflater
@@ -20,10 +20,6 @@ import jp.wasabeef.glide.transformations.RoundedCornersTransformation
 class UsersListAdapter(
     private var models: ArrayList<ListUser> = ArrayList()
 ): RecyclerView.Adapter<UserViewHolder>() {
-
-    init {
-        setHasStableIds(true)
-    }
 
     private val clickPublisher = PublishSubject.create<ListUser>()
     val clickEvent: Observable<ListUser> = clickPublisher
@@ -119,6 +115,7 @@ class UsersListAdapter(
         val fullNameText = model.firstName + " " + model.lastName
 
         holder.nameTextView.text = fullNameText
+        holder.imageView.setImageDrawable(null)
 
         holder.container.setOnClickListener { clickPublisher.onNext(model) }
 

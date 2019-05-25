@@ -9,6 +9,7 @@ import androidx.swiperefreshlayout.widget.SwipeRefreshLayout
 import com.flaringapp.reqres.R
 import com.flaringapp.reqres.main.model.MainScreenModel
 import com.flaringapp.reqres.main.model.objects.ListUser
+import com.flaringapp.reqres.main.view.usersList.UsersListAdapter
 import io.reactivex.android.schedulers.AndroidSchedulers
 import io.reactivex.disposables.Disposable
 import io.reactivex.schedulers.Schedulers
