@@ -72,25 +72,17 @@ class UserFragment : Fragment() {
 
         model = UserFragmentModel(context!!)
 
-        val imageView: ImageView = view.findViewById(R.id.user_image)
-        val firstNameText: TextView = view.findViewById(R.id.first_name_text)
-        val lastNameText: TextView = view.findViewById(R.id.last_name_text)
-        val emailText: TextView = view.findViewById(R.id.email_text)
+        imageView = view.findViewById(R.id.user_image)
+        firstNameText = view.findViewById(R.id.first_name_text)
+        lastNameText = view.findViewById(R.id.last_name_text)
+        emailText = view.findViewById(R.id.email_text)
 
-        firstNameText.text = firstName
-        lastNameText.text = lastName
-
-        val content = SpannableString(email)
-        content.setSpan(UnderlineSpan(), 0, content.length, 0)
-
-        emailText.text = content
-
-        emailText.setOnClickListener {
+        emailText!!.setOnClickListener {
             if (context != null && email != null) ViewUtils.sendEmail(context!!, email!!)
         }
 
         loadData()
-        loadImage(imageView)
+        loadImage(imageView!!)
     }
 
     override fun onDestroyView() {
@@ -150,6 +142,14 @@ class UserFragment : Fragment() {
         lastName = user.lastName
         email = user.email
         avatarLink = user.avatarLink
+
+        firstNameText?.text = firstName
+        lastNameText?.text = lastName
+
+        val content = SpannableString(email)
+        content.setSpan(UnderlineSpan(), 0, content.length, 0)
+
+        emailText?.text = content
     }
 
     private fun loadImage(imageView: ImageView) {
@@ -176,6 +176,7 @@ class UserFragment : Fragment() {
             val bundle = Bundle()
             bundle.putInt(userIdKey, userId)
             bundle.putString(avatarLinkKey, initialAvatarLink)
+            fragment.arguments = bundle
             return fragment
         }
     }

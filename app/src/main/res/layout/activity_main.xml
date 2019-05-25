@@ -17,5 +17,10 @@
             android:layout_height="match_parent"/>
 
     </androidx.swiperefreshlayout.widget.SwipeRefreshLayout>
+    
+    <FrameLayout
+        android:id="@+id/user_fragment_container"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"/>
 
 </androidx.constraintlayout.widget.ConstraintLayout>
